@@ -28,20 +28,28 @@ app.use(methodOverride());
 
 // Import Models and controllers
 var models                 = require('./app/models/player')(app, mongoose);
-var ChampionshipController = require('./app/controllers/players');
+var playersController = require('./app/controllers/players');
 
 // API Routes
 var Championship = express.Router();
 
 Championship.route('/result')
-    .get(ChampionshipController.findAll)
-    .post(ChampionshipController.addResult);
+    .post(playersController.addResult);
+
+Championship.route('/top')
+    .get(playersController.top);
+
+Championship.route('/new')
+    .post(playersController.new);
+
+Championship.route('/restart')
+    .delete(playersController.restart);
 
 app.use('/api/championship', Championship);
 
 
 // Setting port to running aplication
-var server = app.listen(process.env.PORT || 3000, function () {
+var server = app.listen(process.env.PORT || 3001, function () {
     var port = server.address().port;
     console.log("App running on port", port);
 });
