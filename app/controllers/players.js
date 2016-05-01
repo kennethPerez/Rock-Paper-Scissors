@@ -1,6 +1,9 @@
 // Setting mongoose module and the Model Player
-var mongoose = require('mongoose');
-var Player  = mongoose.model('Player');
+var mongoose = require('mongoose'),
+    Player = mongoose.model('Player');
+
+// This variable is used for get the finalist of the championship.
+exports.temp;
 
 /**
  * This method checks the name in the database, if exist, the points
@@ -14,17 +17,22 @@ var Player  = mongoose.model('Player');
  @param {Object} res
  *   This is the response that server returns in the request.
  */
-exports.newResult = function(_name, _points, res) {
-    Player.findOne({ 'name': _name }, function (err, player) {
-        if(err)
+exports.newResult = function (_name, _points, res) {
+    Player.findOne({
+        'name': _name
+    }, function (err, player) {
+        if (err)
             return res.send(500, err.message);
         if (player)
             player.points = player.points += _points;
         else
-            player = new Player({name: _name, points: _points});
+            player = new Player({
+                name: _name,
+                points: _points
+            });
 
-        player.save(function(err) {
-            if(err) return res.send(500, err.message);
+        player.save(function (err) {
+            if (err) return res.send(500, err.message);
         });
     });
 };
@@ -38,10 +46,12 @@ exports.newResult = function(_name, _points, res) {
  * @param {Object} res
  *   This is the response that server returns in the request.
  */
-exports.addResult = function(req, res) {
+exports.addResult = function (req, res) {
     exports.newResult(req.body.first, 3, res);
     exports.newResult(req.body.second, 1, res);
-    res.status(200).jsonp({status: 'success'});
+    res.status(200).jsonp({
+        status: 'success'
+    });
 };
 
 
@@ -54,15 +64,19 @@ exports.addResult = function(req, res) {
  * @param {Object} res
  *   This is the response that server returns in the request.
  */
-exports.top = function(req, res) {
-    Player.find().sort({ points: -1 }).limit( parseInt(req.query.count == undefined ? 10 : req.query.count) ).select("name").find(function (err, players) {
-        if(err)
+exports.top = function (req, res) {
+    Player.find().sort({
+        points: -1
+    }).limit(parseInt(req.query.count == undefined ? 10 : req.query.count)).select("name").find(function (err, players) {
+        if (err)
             return res.send(500, err.message);
         var playersArray = [];
-        players.forEach( function(player) {
-            playersArray.push( player.name );
+        players.forEach(function (player) {
+            playersArray.push(player.name);
         });
-        res.status(200).jsonp({players: playersArray});
+        res.status(200).jsonp({
+            players: playersArray
+        });
     });
 };
 
@@ -75,18 +89,20 @@ exports.top = function(req, res) {
  * @param {Object} res
  *   This is the response that server returns in the request.
  */
-exports.restart = function(req, res) {
+exports.restart = function (req, res) {
     Player.remove({}, function (err, players) {
-        if(err)
+        if (err)
             return res.send(500, err.message);
         else
-            res.status(200).jsonp({status: 'success'});
+            res.status(200).jsonp({
+                status: 'success'
+            });
     });
 };
 
 
 /**
- * This method calculate winne duel, the algorithm takes a two-element list and verify this for finding errors, if exist errors then raise exception.
+ * This method calculate winner of a duel, the algorithm takes a two-element list and verify this for finding errors, if exist errors then raise exception.
  *
  * @param {Object} player1
  *   This object contain the name and the used strategic.
@@ -95,9 +111,9 @@ exports.restart = function(req, res) {
  * @return {Object}
  *   Return object with the player that wins in the first position, and the second position the player that loses.
  */
-exports.winner = function(player1, player2){
+exports.winner = function (player1, player2) {
 
-    if(typeof(player1[0]) != "string" || typeof(player2[0]) != "string")
+    if (typeof (player1[0]) != "string" || typeof (player2[0]) != "string")
         throw "The struccture of the championship is incorrect.";
 
     var strategyPlayer1 = player1[1],
@@ -108,51 +124,66 @@ exports.winner = function(player1, player2){
 
     if (strategyPlayer1 != strategyPlayer2) {
 
-        switch(strategyPlayer1) {
-            case "r" :
+        switch (strategyPlayer1) {
+            case "r":
                 return strategyPlayer2 == "s" ? [player1, player2] : [player2, player1];
-            case "p" :
+            case "p":
                 return strategyPlayer2 == "r" ? [player1, player2] : [player2, player1];
-            case "s" :
+            case "s":
                 return strategyPlayer2 == "p" ? [player1, player2] : [player2, player1];
             default:
                 throw "A player used a different strategy to R-P-S";
         }
-    }
-    else {
+    } else {
         return [player1, player2]
     }
 }
 
 
-// This variable is used for get the finalist of the championship.
-exports.temp = undefined;
-exports.tournament_winner = function(tournament){
+/**
+ * This method calculate winner of a tournament, if the structure has errors then raise an exception.
+ *
+ * @param {Object} tournament
+ *   This object contain the structure of the championship.
+ * @return {Object}
+ *   Return object with the player that wins the championship.
+ */
+exports.tournament_winner = function (tournament) {
     if (tournament.length != 2)
         throw "The struccture of the championship is incorrect.";
-    if(typeof(tournament[0][0]) === "string"){
+    if (typeof (tournament[0][0]) === "string") {
         exports.temp = exports.winner(tournament[0], tournament[1]);
         return exports.temp[0]
     }
-    return exports.tournament_winner([   exports.tournament_winner(tournament[0]), exports.tournament_winner(tournament[1])  ])
+    return exports.tournament_winner([exports.tournament_winner(tournament[0]), exports.tournament_winner(tournament[1])])
 
 }
 
 
+/**
+ * This method resolve a championship and insert the winner and the second place of the tournament into database..
+ *
+ * @param {Object} req
+ *   This is the POST request, contains the data structure of championship.
+ * @param {Object} res
+ *   This is the response that server returns in the request.
+ */
+exports.new = function (req, res) {
 
-
-
-exports.new = function(req, res) {
-
-    // Cast of String received in the request to a Javascript array
-    var tourney = JSON.parse(req.body.data.replace(/'/g, ''));
+    // Cast of String received in the request to a Javascript array.
+    try {
+        var tourney = JSON.parse(req.body.data.replace(/'/g, ''));
+    } catch (err) {
+        throw "The struccture of the championship is incorrect.";
+    }
     exports.tournament_winner(tourney)
+
+    // Add the result of the champioship in the database.
     exports.newResult(exports.temp[0][0], 3, res);
     exports.newResult(exports.temp[1][0], 1, res);
 
-    res.status(200).jsonp({winner: exports.temp[0]});
+    res.status(200).jsonp({
+        winner: exports.temp[0]
+    });
 
 };
-
-
-
