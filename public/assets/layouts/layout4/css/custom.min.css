@@ -1,0 +1,50 @@
+.space{
+    padding-bottom: 30px;
+}
+
+.restore{
+    padding-top: 30px;
+}
+
+.m-heading-1.m-bordered {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.scroll{
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+}
+
+pre {
+    height: 350px;
+    max-height: 350px;
+    overflow: auto;
+    background-color: #eeeeee;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+
+.no-resize{resize: none;}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

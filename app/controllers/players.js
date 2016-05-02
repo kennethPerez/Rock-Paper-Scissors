@@ -114,13 +114,17 @@ exports.restart = function (req, res) {
 exports.winner = function (player1, player2) {
 
     if (typeof (player1[0]) != "string" || typeof (player2[0]) != "string")
-        throw "The struccture of the championship is incorrect.";
+        throw "The structure of the championship is incorrect.";
 
     var strategyPlayer1 = player1[1],
-        strategyPlayer2 = player2[1];
+        strategyPlayer2 = player2[1],
+        strategyList = ['r','p','s'];
 
     strategyPlayer1 = strategyPlayer1.toLowerCase();
-    strategyPlayer2 = strategyPlayer2.toLowerCase();
+    strategyPlayer2 = strategyPlayer2.toLowerCase();  
+    
+    if (strategyList.indexOf(strategyPlayer1) == -1  || strategyList.indexOf(strategyPlayer2) == -1)
+        throw "A player used a different strategy to R-P-S.";
 
     if (strategyPlayer1 != strategyPlayer2) {
 
@@ -132,7 +136,7 @@ exports.winner = function (player1, player2) {
             case "s":
                 return strategyPlayer2 == "p" ? [player1, player2] : [player2, player1];
             default:
-                throw "A player used a different strategy to R-P-S";
+                throw "A player used a different strategy to R-P-S.";
         }
     } else {
         return [player1, player2]
@@ -174,7 +178,7 @@ exports.new = function (req, res) {
     try {
         var tourney = JSON.parse(req.body.data.replace(/'/g, ''));
     } catch (err) {
-        throw "The struccture of the championship is incorrect.";
+        throw "The structure of the championship is incorrect.";
     }
     exports.tournament_winner(tourney)
 

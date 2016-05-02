@@ -1,0 +1,50 @@
+<div ng-controller="topController as vm" class="row">
+    <div>
+        <div class="portlet light">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <i class="icon-game-controller font-blue-steel"></i>
+                    <span class="caption-subject bold font-blue-steel uppercase"> Rock Paper and Scissor </span>
+                    <span class="caption-helper">The top player is obtained from the results stored in the database.</span>
+                </div>                                        
+            </div>
+            <div class="portlet-body">
+                <div class="container">
+
+                    <h3 class="text-center">Top of best players</h3>
+                    <br>
+
+                    <div class="col-md-offset-2 col-md-6">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="col-md-9 col-xs-8 col-sm-8 control-label">Number of players that you want see:</label>
+                                <div class="col-md-3 col-xs-4 col-sm-4">
+                                    <input ng-change="vm.getTop()" ng-model="vm.count" type="number" class="form-control" placeholder="10"> 
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-6 scroll"> 
+                        
+                        
+                        <h4 ng-if="vm.listPlayers.length==0"> Top is empty</h4>
+                        
+                        <div ng-repeat="player in vm.listPlayers" class="m-heading-1 m-bordered" ng-class="{'border-yellow-saffron': player.position == 'first', 'border-grey-silver': player.position == 'second', 'border-default': player.position == 'third' || player.position == 'other'}">
+                            <h2 ng-if="player.position == 'first'"><img height="50px" width="50px" src="./assets/layouts/layout4/img/champion.jpg"> {{player.name}}</h2>
+                            <h3 ng-if="player.position == 'second'"><img height="50px" width="50px" src="./assets/layouts/layout4/img/second.jpg"> {{player.name}}</h3>
+                            <h4 ng-if="player.position == 'third'"> {{player.name}}</h4>
+                            <p ng-if="player.position == 'other'"> {{player.name}}</p>
+                            <hr>
+                        </div>      
+                    </div>
+                    <br>
+                    <div class="col-md-offset-3 col-md-6 restore">
+                        <button ng-click="vm.restore()" class="btn red btn-block">Restore database</button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="portlet light form-fit bordered">
+        <div class="portlet-title tabbable-line">
+            <div class="caption">
+                <i class="icon-game-controller font-blue-steel"></i>
+                <span class="caption-subject bold font-blue-steel uppercase"> Rock Paper and Scissor </span>
+                <span class="caption-helper">The game's solution was implemented with championships structures.</span>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-target="#portlet_tab1" data-toggle="tab"> New </a>
+                </li>
+                <li>
+                    <a data-target="#portlet_tab2" data-toggle="tab"> Files examples </a>
+                </li>  
+            </ul>
+        </div>
+        <div class="portlet-body form">
+            <div ng-controller="championshipController as vm" class="tab-content">
+                <div class="tab-pane active" id="portlet_tab1">
+
+                    <form role="form" name="input_form">
+                        <div class="form-body">
+
+                            <h3 class="text-center">Structure of the championship</h3>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-1 col-md-10 ">
+                                    <textarea ng-required="true" ng-model="vm.content"  id="inputFile" name="inputFile" class="form-control no-resize" rows="20" placeholder="Please write a structure..."></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-1 col-md-4">
+
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="input-group input-large">
+                                            <div class="form-control uneditable-input input-fixed input-medium" data-trigger="fileinput">
+                                                <i class="fa fa-file fileinput-exists"></i>&nbsp;
+                                                <span class="fileinput-filename"> </span>
+                                            </div>
+                                            <span class="input-group-addon btn default btn-file">
+                                                <span class="fileinput-new"> Select file </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input on-read-file="vm.showContent($fileContent)" type="file" name="..."> 
+                                            </span>
+                                            <a ng-click="vm.content = ''" class="input-group-addon btn red fileinput-exists" data-dismiss="fileinput"> <i class="fa fa-remove font-white"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>                                                            
+                            </div>
+
+                            <div class="form-actions">
+                                <div class="col-md-offset-10 col-md-2">
+                                    <button ng-click="vm.processChampioship()" type="submit" class="btn btn-circle btn-lg green-haze"  ng-disabled="input_form.$invalid">
+                                        <i class="icon-control-play"></i> Play
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>                                                    
+                    </form>
+
+
+                </div>
+                <div class="tab-pane" id="portlet_tab2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Example 1 
+                                    <buttom ng-click="vm.download('Example Championship #1.txt', vm.fileOne)" class="btn btn-circle green-haze">
+                                        <i class="icon-arrow-down"></i> Download
+                                    </buttom>
+                                </h4>
+
+                                <pre>{{vm.fileOne}}</pre>
+                                <h5 class="space">In this example the winner is <strong>Dave</strong> with the strategy <strong>S</strong>.</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Example 2
+                                    <buttom ng-click="vm.download('Example Championship #2.txt', vm.fileTwo)" class="btn btn-circle green-haze">
+                                        <i class="icon-arrow-down"></i> Download
+                                    </buttom>
+                                </h4>
+                                <pre>{{vm.fileTwo}}</pre> 
+                                <h5 class="space">In this example the winner is <strong>Richard</strong> with the strategy <strong>R</strong>.</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Example 3
+                                    <buttom ng-click="vm.download('Example Championship #3.txt', vm.fileThree)" class="btn btn-circle green-haze">
+                                        <i class="icon-arrow-down"></i> Download
+                                    </buttom>
+                                </h4>
+                                <pre>{{vm.fileThree}}</pre>
+                                <h5 class="space">In this example the winner is <strong>Michael</strong> with the strategy <strong>S</strong>.</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <h4>Example 4
+                                    <buttom ng-click="vm.download('Example Championship #4.txt', vm.fileFour)" class="btn btn-circle green-haze">
+                                        <i class="icon-arrow-down"></i> Download
+                                    </buttom>
+                                </h4>
+                                <pre>{{vm.fileFour}}</pre>
+                                <h5 class="space">In this example the winner is <strong>Allen</strong> with the strategy <strong>S</strong>.</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
