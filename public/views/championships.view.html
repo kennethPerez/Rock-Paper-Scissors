@@ -11,13 +11,14 @@
                     <a data-target="#portlet_tab1" data-toggle="tab"> New </a>
                 </li>
                 <li>
-                    <a data-target="#portlet_tab2" data-toggle="tab"> Files examples </a>
+                    <a data-target="#portlet_tab2" data-toggle="tab" data-ng-click="vm.getTop();"> TOP </a>
                 </li>  
             </ul>
         </div>
         <div class="portlet-body form">
             <div ng-controller="championshipController as vm" class="tab-content">
-                <div class="tab-pane active" id="portlet_tab1">
+
+                <div class="tab-pane active fade in" id="portlet_tab1">
 
                     <form role="form" name="input_form">
                         <div class="form-body">
@@ -65,49 +66,46 @@
 
 
                 </div>
-                <div class="tab-pane" id="portlet_tab2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4>Example 1 
-                                    <buttom ng-click="vm.download('Example Championship #1.txt', vm.fileOne)" class="btn btn-circle green-haze">
-                                        <i class="icon-arrow-down"></i> Download
-                                    </buttom>
-                                </h4>
 
-                                <pre>{{vm.fileOne}}</pre>
-                                <h5 class="space">In this example the winner is <strong>Dave</strong> with the strategy <strong>S</strong>.</h5>
-                            </div>
-                            <div class="col-md-6">
-                                <h4>Example 2
-                                    <buttom ng-click="vm.download('Example Championship #2.txt', vm.fileTwo)" class="btn btn-circle green-haze">
-                                        <i class="icon-arrow-down"></i> Download
-                                    </buttom>
-                                </h4>
-                                <pre>{{vm.fileTwo}}</pre> 
-                                <h5 class="space">In this example the winner is <strong>Richard</strong> with the strategy <strong>R</strong>.</h5>
-                            </div>
-                            <div class="col-md-6">
-                                <h4>Example 3
-                                    <buttom ng-click="vm.download('Example Championship #3.txt', vm.fileThree)" class="btn btn-circle green-haze">
-                                        <i class="icon-arrow-down"></i> Download
-                                    </buttom>
-                                </h4>
-                                <pre>{{vm.fileThree}}</pre>
-                                <h5 class="space">In this example the winner is <strong>Michael</strong> with the strategy <strong>S</strong>.</h5>
-                            </div>
-                            <div class="col-md-6">
-                                <h4>Example 4
-                                    <buttom ng-click="vm.download('Example Championship #4.txt', vm.fileFour)" class="btn btn-circle green-haze">
-                                        <i class="icon-arrow-down"></i> Download
-                                    </buttom>
-                                </h4>
-                                <pre>{{vm.fileFour}}</pre>
-                                <h5 class="space">In this example the winner is <strong>Allen</strong> with the strategy <strong>S</strong>.</h5>
+                <div class="tab-pane fade" id="portlet_tab2">
+                    <div class="container">
+
+                        <h3 class="text-center">Top of best players</h3>
+                        <br>
+
+                        <div class="col-md-offset-2 col-md-6">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label class="col-md-9 col-xs-8 col-sm-8 control-label">Number of players that you want see:</label>
+                                    <div class="col-md-3 col-xs-4 col-sm-4">
+                                        <input ng-change="vm.getTop()" ng-model="vm.count" type="number" class="form-control" placeholder="10">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-offset-3 col-md-6 scroll">
+
+
+                            <h4 ng-if="vm.listPlayers.length==0"> Top is empty..</h4>
+
+                            <div ng-repeat="player in vm.listPlayers" class="m-heading-1 m-bordered" ng-class="{'border-yellow-saffron': player.position == 'first', 'border-grey-silver': player.position == 'second', 'border-default': player.position == 'third' || player.position == 'other'}">
+                                <h2 ng-if="player.position == 'first'"><img height="50px" width="50px" src="./assets/layouts/img/champion.jpg"> {{player.name}}</h2>
+                                <h3 ng-if="player.position == 'second'"><img height="50px" width="50px" src="./assets/layouts/img/second.jpg"> {{player.name}}</h3>
+                                <h4 ng-if="player.position == 'third'"> {{player.name}}</h4>
+                                <p ng-if="player.position == 'other'"> {{player.name}}</p>
+                                <hr>
                             </div>
                         </div>
+                        <br>
+                        <div class="col-md-offset-3 col-md-6 restore space">
+                            <button ng-show="vm.listPlayers.length!=0" ng-click="vm.restore()" class="btn red btn-block">Restore database</button>
+                        </div>
+
                     </div>
                 </div>
+
+
             </div>
         </div>
     </div>

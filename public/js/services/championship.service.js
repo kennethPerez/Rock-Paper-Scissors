@@ -3,10 +3,16 @@
 
     angular
         .module('app')
-        .service('ChampionshipService', ChampionshipService);
+        .service('championshipService', championshipService);
 
-    function ChampionshipService ($http, $q) {       
+    function championshipService ($http, $q) {
 
+        /**
+         * Method that resolve a tournament.
+         *
+         *@param {String} tournament
+         *  Structure of championship.
+         */
         this.new = function (tournament) {
             var defered = $q.defer(),
                 promise = defered.promise;

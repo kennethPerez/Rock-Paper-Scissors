@@ -1,0 +1,156 @@
+<div ng-controller="filesController as vm" class="row">
+    <div>
+        <div class="portlet light">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <i class="icon-game-controller font-blue-steel"></i>
+                    <span class="caption-subject bold font-blue-steel uppercase"> Rock Paper and Scissor </span>
+                    <span class="caption-helper">Rest API Documentation.</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <h3 class="text-center">Rock-Paper-Scissor REST API</h3>
+                    <br>
+                    <div class="m-heading-1 m-bordered border-blue-steel restore">
+                        <h4>The API provides three methods for the final user, this just have to follow the next instrucctions:</h4>
+                        <a target="_blank" href="https://github.com/kennethPerez/Rock-Paper-Scissors" class="btn"><span class="fa fa-github"></span> View Source Code</a>
+                        <hr>
+                    </div>
+
+                    <div class="portlet box blue-steel space-lateral">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-cloud-upload"></i>POST api/championship/result </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"> </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <p class="text-muted">
+                                Stores the first and second place of a tournament, each user is stored with their respective scores. The user names will be unique, but the same user can win 1 or more championships. Returns the operation status if successfully.
+                            </p>
+
+                            <h4 class="text-muted"><strong>Resource information:</strong></h4>
+                            <h5 class="text-muted"><strong>Resource URL:</strong> /api/championship/result</h5>
+                            <h5 class="text-muted"><strong>HTTP Method:</strong> POST</h5>
+                            <h5 class="text-muted"><strong>Response format:</strong> JSON</h5>
+                            <h5 class="text-muted"><strong>Parameters:</strong></h5>
+
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted">first <br><em>required</em></p></div>
+                                <div class="col-md-11"><p class="text-muted">The name of the winner of the championship. <br>Example: <code>Dave</code></p></div>
+                                <div class="col-md-1"><p class="text-muted">second<br><em>required</em></p></div>
+                                <div class="col-md-11"><p class="text-muted">The name of the second place of the championship. <br>Example: <code>Armando</code></p></div>
+                            </div>
+
+                            <h5 class="text-muted"><strong>Example Request</strong></h5>
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted line-space">POST</p></div>
+                                <div class="col-md-11"><p class="text-muted line-space">https://kenneth-perez.scalingo.com/api/championship/result</p></div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted line-space">POST Data</p></div>
+                                <div class="col-md-11"><p class="text-muted line-space">first=Dave&second=Armando</p></div>
+                            </div>
+
+                            <h5 class="text-muted"><strong>Example Output</strong></h5>
+                            <code>
+                                {
+                                status: 'success'
+                                }
+                            </code>
+
+                        </div>
+                    </div>
+
+                    <div class="portlet box blue-steel space-lateral">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-cloud-download"></i>GET api/championship/top </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"> </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <p class="text-muted">
+                                Retrieves the top players of all championships. Returns the list of player names based on the count provided.
+                            </p>
+
+                            <h4 class="text-muted"><strong>Resource information:</strong></h4>
+                            <h5 class="text-muted"><strong>Resource URL:</strong> /api/championship/top</h5>
+                            <h5 class="text-muted"><strong>HTTP Method:</strong> GET</h5>
+                            <h5 class="text-muted"><strong>Response format:</strong> JSON</h5>
+                            <h5 class="text-muted"><strong>Parameters:</strong></h5>
+
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted">count <br><em>optional</em></p></div>
+                                <div class="col-md-11"><p class="text-muted">Sets the count of records to be retrieved. If not provided, the default value is 10. <br>Example: <code>123</code></p></div>
+                            </div>
+
+                            <h5 class="text-muted"><strong>Example Request</strong></h5>
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted line-space">GET</p></div>
+                                <div class="col-md-11"><p class="text-muted line-space">https://kenneth-perez.scalingo.com/api/championship/top?count=10</p></div>
+                            </div>
+                            <h5 class="text-muted"><strong>Example Output</strong></h5>
+                            <code>
+                                {
+                                players: ["Dave", "Armando", "Robert"]
+                                }
+                            </code>
+
+                        </div>
+</div>
+
+                    <div class="portlet box blue-steel space-lateral">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-cloud-upload"></i>POST api/championship/new </div>
+                            <div class="tools">
+                                <a href="javascript:;" class="collapse"> </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <p class="text-muted">
+                                Receives the championship data and computes it to identify the winner. The first and second place are stored into a database with their respective scores. Returns the winner of the championship.
+                            </p>
+
+                            <h4 class="text-muted"><strong>Resource information:</strong></h4>
+                            <h5 class="text-muted"><strong>Resource URL:</strong> /api/championship/new</h5>
+                            <h5 class="text-muted"><strong>HTTP Method:</strong> POST</h5>
+                            <h5 class="text-muted"><strong>Response format:</strong> JSON</h5>
+                            <h5 class="text-muted"><strong>Parameters:</strong></h5>
+
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted">data <br><em>mandatory</em></p></div>
+                                <div class="col-md-11"><p class="text-muted">The data of the championship following the bracketed array standard. <br>Example: <code>[["Armando", "P"],["Dave", "S"]]</code></p></div>
+                            </div>
+
+                            <h5 class="text-muted"><strong>Example Request</strong></h5>
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted line-space">POST</p></div>
+                                <div class="col-md-11"><p class="text-muted line-space">https://kenneth-perez.scalingo.com/api/championship/new</p></div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="row">
+                                <div class="col-md-1"><p class="text-muted line-space">POST Data</p></div>
+                                <div class="col-md-11"><p class="text-muted line-space">data=[["Armando", "P"],["Dave", "S"]]</p></div>
+                            </div>
+
+                            <h5 class="text-muted"><strong>Example Output</strong></h5>
+                            <code>
+                                {
+                                winner: ["Dave", "S"]
+                                }
+                            </code>
+                        </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,54 @@
+<div ng-controller="filesController as vm" class="row">
+    <div>
+        <div class="portlet light file">
+            <div class="portlet-title tabbable-line">
+                <div class="caption">
+                    <i class="icon-game-controller font-blue-steel"></i>
+                    <span class="caption-subject bold font-blue-steel uppercase"> Rock Paper and Scissor </span>
+                    <span class="caption-helper">Examples of structures of championships in downloadable files.</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <h4>Example 1
+                            <buttom ng-click="vm.download('Example Championship #1.txt', vm.fileOne)" class="btn btn-circle green-haze">
+                                <i class="icon-arrow-down"></i> Download
+                            </buttom>
+                        </h4>
+
+                        <pre>{{vm.fileOne}}</pre>
+                        <h5 class="space">In this example the winner is <strong>Dave</strong> with the strategy <strong>S</strong>.</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Example 2
+                            <buttom ng-click="vm.download('Example Championship #2.txt', vm.fileTwo)" class="btn btn-circle green-haze">
+                                <i class="icon-arrow-down"></i> Download
+                            </buttom>
+                        </h4>
+                        <pre>{{vm.fileTwo}}</pre>
+                        <h5 class="space">In this example the winner is <strong>Richard</strong> with the strategy <strong>R</strong>.</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Example 3
+                            <buttom ng-click="vm.download('Example Championship #3.txt', vm.fileThree)" class="btn btn-circle green-haze">
+                                <i class="icon-arrow-down"></i> Download
+                            </buttom>
+                        </h4>
+                        <pre>{{vm.fileThree}}</pre>
+                        <h5 class="space">In this example the winner is <strong>Michael</strong> with the strategy <strong>S</strong>.</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Example 4
+                            <buttom ng-click="vm.download('Example Championship #4.txt', vm.fileFour)" class="btn btn-circle green-haze">
+                                <i class="icon-arrow-down"></i> Download
+                            </buttom>
+                        </h4>
+                        <pre>{{vm.fileFour}}</pre>
+                        <h5 class="space">In this example the winner is <strong>Allen</strong> with the strategy <strong>S</strong>.</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

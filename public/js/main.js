@@ -1,2 +1,4 @@
-angular
-    .module('app', []);
+/**
+ * Module of angularJS.
+ */
+angular.module('app', []);

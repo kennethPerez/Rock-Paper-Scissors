@@ -5,6 +5,9 @@
         .module('app')
         .directive('onReadFile', onReadFile);
 
+    /**
+     * This directive is used to load the data of files with are loaded.
+     */
     function onReadFile ($parse) {
         return {
             restrict: 'A',

@@ -1,0 +1,115 @@
+.logo-default{
+    height: 20px;
+}
+.space{
+    padding-bottom: 30px;
+}
+.line{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-top: 2px solid #eee;
+}
+.line-space{
+    margin: 1px;
+    padding: 1px;
+}
+.space-lateral{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.email{
+    padding-top: 10px;
+}
+.restore{
+    padding-top: 30px;
+}
+.files{
+    position: relative;
+}
+.m-heading-1.m-bordered {
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+.scroll{
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+}
+pre {
+    height: 350px;
+    max-height: 350px;
+    overflow: auto;
+    background-color: #eeeeee;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+}
+.no-resize {
+    resize: none;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.stories-header {
+  text-align: center;
+}
+.stories-header h1 {
+  color: #373d43;
+  font-size: 35px;
+  font-weight: 600;
+}
+.stories-header h2 {
+  color: #808a94;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+.stories-cont .photo {
+  width: 100%;
+}
+.stories-cont .photo img {
+  margin: 30px auto;
+  width: 130px;
+  height: 130px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+.stories-cont .title {
+  text-align: center;
+}
+.stories-cont .title span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #373d43;
+}
+.stories-cont .desc {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.stories-cont .desc span {
+  font-size: 14px;
+  font-weight: 400;
+  color: #808a94;
+}
