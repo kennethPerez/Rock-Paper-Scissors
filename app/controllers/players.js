@@ -111,11 +111,10 @@ exports.restart = function (req, res) {
  * @return {Object}
  *   Return object with the player that wins in the first position, and the second position the player that loses.
  */
-exports.winner = function (player1, player2, res) {
+exports.winner = function (player1, player2) {
 
     if (typeof (player1[0]) != "string" || typeof (player2[0]) != "string")
-        return res.send(500, "The structure of the championship is incorrect.");
-        //throw "The structure of the championship is incorrect.";
+        throw "The structure of the championship is incorrect.";
 
     var strategyPlayer1 = player1[1],
         strategyPlayer2 = player2[1],
@@ -125,8 +124,7 @@ exports.winner = function (player1, player2, res) {
     strategyPlayer2 = strategyPlayer2.toLowerCase();  
     
     if (strategyList.indexOf(strategyPlayer1) == -1  || strategyList.indexOf(strategyPlayer2) == -1)
-        return res.send(500, "A player used a different strategy to R-P-S.");
-        //throw "A player used a different strategy to R-P-S.";
+        throw "A player used a different strategy to R-P-S.";
 
     if (strategyPlayer1 != strategyPlayer2) {
 
@@ -138,8 +136,7 @@ exports.winner = function (player1, player2, res) {
             case "s":
                 return strategyPlayer2 == "p" ? [player1, player2] : [player2, player1];
             default:
-                return res.send(500, "A player used a different strategy to R-P-S.");
-                //throw "A player used a different strategy to R-P-S.";
+                throw "A player used a different strategy to R-P-S.";
         }
     } else {
         return [player1, player2]
@@ -157,13 +154,12 @@ exports.winner = function (player1, player2, res) {
  */
 exports.tournament_winner = function (tournament, res) {
     if (tournament.length != 2)
-        return res.send(500, "The structure of the championship is incorrect.");
-        //throw "The struccture of the championship is incorrect.";
+        throw "The struccture of the championship is incorrect.";
     if (typeof (tournament[0][0]) === "string") {
-        exports.temp = exports.winner(tournament[0], tournament[1], res);
+        exports.temp = exports.winner(tournament[0], tournament[1]);
         return exports.temp[0]
     }
-    return exports.tournament_winner([exports.tournament_winner(tournament[0]), exports.tournament_winner(tournament[1])], res)
+    return exports.tournament_winner([exports.tournament_winner(tournament[0]), exports.tournament_winner(tournament[1])])
 
 }
 
@@ -182,10 +178,9 @@ exports.new = function (req, res) {
     try {
         var tourney = JSON.parse(req.body.data.replace(/'/g, ''));
     } catch (err) {
-        return res.send(500, "The structure of the championship is incorrect.");
-        //throw "The structure of the championship is incorrect.";
+        throw "The structure of the championship is incorrect.";
     }
-    exports.tournament_winner(tourney, res)
+    exports.tournament_winner(tourney)
 
     // Add the result of the champioship in the database.
     exports.newResult(exports.temp[0][0], 3, res);

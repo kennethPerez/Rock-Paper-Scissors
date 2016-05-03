@@ -47,7 +47,7 @@
                 .catch(function (err) {
                 swal(
                     'Sorry!! An error was occurred.',
-                    err+".",
+                    err,
                     'error'
                 );
             });
